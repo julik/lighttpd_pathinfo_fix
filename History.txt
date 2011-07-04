@@ -1,3 +1,7 @@
+=== 1.0.1 / 2011-07-04
+
+* Updated the documentation
+
 === 1.0.0 / 2011-07-04
 
 * 1 major enhancement

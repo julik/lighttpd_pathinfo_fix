@@ -3,7 +3,7 @@
 # This middleware fixes this issue. This is also
 # modified to account for the case when SCRIPT_NAME is the name of the 404 script
 class LighttpdPathinfoFix
-  VERSION = '1.0.0'
+  VERSION = '1.0.1'
   
   def initialize(app)
     @app = app
