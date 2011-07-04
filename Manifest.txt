@@ -1,8 +1,8 @@
 .autotest
+Gemfile
 History.txt
 Manifest.txt
-README.txt
+README.rdoc
 Rakefile
-bin/lighttpd_pathinfo_fix
 lib/lighttpd_pathinfo_fix.rb
 test/test_lighttpd_pathinfo_fix.rb
