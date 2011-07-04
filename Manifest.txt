@@ -1,0 +1,8 @@
+.autotest
+History.txt
+Manifest.txt
+README.txt
+Rakefile
+bin/lighttpd_pathinfo_fix
+lib/lighttpd_pathinfo_fix.rb
+test/test_lighttpd_pathinfo_fix.rb
