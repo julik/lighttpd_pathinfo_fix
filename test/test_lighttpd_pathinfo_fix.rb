@@ -1,4 +1,5 @@
 require "test/unit"
+require "stringio"
 require "lighttpd_pathinfo_fix"
 require "flexmock"
 require "flexmock/test_unit"
@@ -65,6 +66,27 @@ class TestLighttpdPathinfoFix < Test::Unit::TestCase
       "DOCUMENT_ROOT"=>"/Code/apps/flame_bacula_search",
       "REQUEST_URI"=>"/?foo=bar", "REDIRECT_URI"=>"/config.ru", "QUERY_STRING"=>"", "REQUEST_PATH"=>"/"}
     dest = {"FCGI_ROLE"=>"RESPONDER", "SERVER_SOFTWARE"=>"lighttpd/1.4.19",
+      "SCRIPT_NAME"=>"", "PATH_INFO"=>"/", "SCRIPT_FILENAME"=>"/Code/apps/flame_bacula_search/config.ru",
+      "DOCUMENT_ROOT"=>"/Code/apps/flame_bacula_search", "REQUEST_URI"=>"/?foo=bar",
+      "REDIRECT_URI"=>"/config.ru", "QUERY_STRING"=>"foo=bar", "REQUEST_PATH"=>"/"}
+    
+    @app.should_receive(:call).with(dest).once
+    @fix.call(source)
+  end
+  
+  def test_writes_to_logfile
+    debug_var = 'DEBUG_LIGHTTPD_PATH_INFO_FIX'
+    # FINISH ME
+    flunk
+  end
+  
+  def test_root_path_properly_munged_even_without_fcgi_role
+    source = {"SERVER_SOFTWARE"=>"lighttpd/1.4.19",
+      "SCRIPT_NAME"=>"/config.ru", "PATH_INFO"=>"",
+      "SCRIPT_FILENAME"=>"/Code/apps/flame_bacula_search/config.ru",
+      "DOCUMENT_ROOT"=>"/Code/apps/flame_bacula_search",
+      "REQUEST_URI"=>"/?foo=bar", "REDIRECT_URI"=>"/config.ru", "QUERY_STRING"=>"", "REQUEST_PATH"=>"/"}
+    dest = {"SERVER_SOFTWARE"=>"lighttpd/1.4.19",
       "SCRIPT_NAME"=>"", "PATH_INFO"=>"/", "SCRIPT_FILENAME"=>"/Code/apps/flame_bacula_search/config.ru",
       "DOCUMENT_ROOT"=>"/Code/apps/flame_bacula_search", "REQUEST_URI"=>"/?foo=bar",
       "REDIRECT_URI"=>"/config.ru", "QUERY_STRING"=>"foo=bar", "REQUEST_PATH"=>"/"}
